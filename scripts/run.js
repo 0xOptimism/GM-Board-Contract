@@ -14,6 +14,16 @@ const main = async () => {
     hre.ethers.utils.formatEther(contractBalance)
   );
 
+
+  const vrfV2Consumer = await hre.ethers.getContractFactory("VRFv2Consumer");
+  const vrfContract = await vrfV2Consumer.deploy(2);
+console.log(vrfV2Consumer, "the consumer")
+  await vrfContract.deployed();
+  console.log(await vrfContract, "the contract")
+
+  const randomNumber = await vrfContract.requestRandomWords()
+  await randomNumber.wait();
+
   /*
    * Let's try two waves now
    */
