@@ -1,6 +1,12 @@
-# Basic Sample Hardhat Project
+# Hardhat Project for the GM Board
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+This contract is the solidity backend of the GM board, it is still in progress on regulary tested on Rinkeby network.
+
+The goal of this project is to learn more about solidity and pooling some ETH to pick a random winner.
+Keep in mind that i'm not using an oracle such as chainlink so the contract can still get easily exploited so i don't recommend to use it on Mainnet.
+I started this contract with a course and plan to iterate on it to shape my Solidity and web3 skills along the way.
+
+Feel free to contributes to the repo if you want to learn with me.
 
 Try running some of the following tasks:
 
