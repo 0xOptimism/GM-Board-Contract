@@ -32,10 +32,11 @@ contract WavePortal {
         seed = (block.timestamp + block.difficulty) % 100;
     }
 
-    function wave(string memory _message) public {
+    function wave(string memory _message) public payable {
         /*
          * We need to make sure the current timestamp is at least 15-minutes bigger than the last timestamp we stored
          */
+        require(msg.value > .01 ether);
         require(
             lastWavedAt[msg.sender] + 15 seconds < block.timestamp,
             "Wait 15m"
