@@ -4,6 +4,7 @@ This contract is the solidity backend of the GM board, it is still in progress o
 
 The goal of this project is to learn more about solidity and pooling some ETH to pick a random winner.
 Keep in mind that i'm not using an oracle such as chainlink so the contract can still get easily exploited so i don't recommend to use it on Mainnet.
+This contract started with a build space simple contract and i've added some functions and logical steps to iterates and build on top of the template contract.
 
 Feel free to contributes to the repo if you want to learn with me.
 
