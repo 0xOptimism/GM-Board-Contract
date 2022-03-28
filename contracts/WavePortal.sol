@@ -32,11 +32,15 @@ contract WavePortal {
         seed = (block.timestamp + block.difficulty) % 100;
     }
 
-    function wave(string memory _message) public {
+    function wave(string memory _message) external payable {
+        /*
+         * We need to make sure the current timestamp is at least 15-minutes bigger than the last timestamp we stored
+         */
         require(
             lastWavedAt[msg.sender] + 15 seconds < block.timestamp,
             "Wait seconds before sending a new message"
         );
+        require(msg.value == .1 ether, "need to send 0.1 eth!!");
 
         /*
          * Update the current timestamp we have for the user
@@ -56,7 +60,7 @@ contract WavePortal {
         if (seed <= 50) {
             console.log("%s won!", msg.sender);
 
-            uint256 prizeAmount = 0.1 ether;
+            uint256 prizeAmount = balanceOfContract();
             require(
                 prizeAmount <= address(this).balance,
                 "Trying to withdraw more money than they contract has."
@@ -74,5 +78,9 @@ contract WavePortal {
 
     function getTotalWaves() public view returns (uint256) {
         return totalWaves;
+    }
+
+    function balanceOfContract() public view returns (uint256) {
+        return address(this).balance;
     }
 }
