@@ -40,7 +40,7 @@ contract WavePortal {
             lastWavedAt[msg.sender] + 15 seconds < block.timestamp,
             "Wait seconds before sending a new message"
         );
-        require(msg.value > .01 ether, "need to send 0.1 eth!!");
+        require(msg.value == .1 ether, "need to send 0.1 eth!!");
 
         /*
          * Update the current timestamp we have for the user
@@ -60,7 +60,7 @@ contract WavePortal {
         if (seed <= 50) {
             console.log("%s won!", msg.sender);
 
-            uint256 prizeAmount = 0.1 ether;
+            uint256 prizeAmount = balanceOfContract();
             require(
                 prizeAmount <= address(this).balance,
                 "Trying to withdraw more money than they contract has."
