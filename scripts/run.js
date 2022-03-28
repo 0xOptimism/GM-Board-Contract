@@ -17,11 +17,11 @@ const main = async () => {
   /*
    * Let's try two waves now
    */
-  const waveTxn = await waveContract.wave("This is wave #1");
-  await waveTxn.wait();
+  const waveTxn = await waveContract.wave("This is wave #1", {
+    value: hre.ethers.utils.parseEther("0.1"),
+  });
 
-  const waveTxn2 = await waveContract.wave("This is wave #2");
-  await waveTxn2.wait();
+  await waveTxn.wait();
 
   contractBalance = await hre.ethers.provider.getBalance(waveContract.address);
   console.log(
@@ -29,8 +29,16 @@ const main = async () => {
     hre.ethers.utils.formatEther(contractBalance)
   );
 
+  const waveTxn2 = await waveContract.wave("This is wave #2", {
+    value: hre.ethers.utils.parseEther("0.1"),
+  });
+  await waveTxn2.wait();
+
   let allWaves = await waveContract.getAllWaves();
   console.log(allWaves);
+
+  let contractTotalBalance = await waveContract.balanceOfContract();
+  console.log(contractTotalBalance);
 };
 
 const runMain = async () => {
