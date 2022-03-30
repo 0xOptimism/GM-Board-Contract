@@ -15,6 +15,7 @@ contract WavePortal {
         string message;
         uint256 timestamp;
         bool isWinner;
+        uint256 price;
     }
 
     Wave[] waves;
@@ -57,9 +58,10 @@ contract WavePortal {
         seed = (block.difficulty + block.timestamp + seed) % 100;
 
         if (seed <= 50) {
-            console.log("%s won!", msg.sender);
-            waves.push(Wave(msg.sender, _message, block.timestamp, true));
             uint256 prizeAmount = balanceOfContract();
+            waves.push(
+                Wave(msg.sender, _message, block.timestamp, true, prizeAmount)
+            );
             require(
                 prizeAmount <= address(this).balance,
                 "Trying to withdraw more money than they contract has."
@@ -67,7 +69,7 @@ contract WavePortal {
             (bool success, ) = (msg.sender).call{value: prizeAmount}("");
             require(success, "Failed to withdraw money from contract.");
         } else {
-            waves.push(Wave(msg.sender, _message, block.timestamp, false));
+            waves.push(Wave(msg.sender, _message, block.timestamp, false, 0));
         }
         emit NewWave(msg.sender, block.timestamp, _message);
     }
