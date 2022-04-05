@@ -8,6 +8,12 @@ const main = async () => {
 
   await waveContract.deployed();
 
+  const vrfV2Consumer = await hre.ethers.getContractFactory("VRFv2Consumer");
+  const vrfContract = await vrfV2Consumer.deploy(2);
+
+  await vrfContract.deployed();
+  
+  console.log("Chainlink address: ", vrfContract.address);
   console.log("WavePortal address: ", waveContract.address);
 };
 
